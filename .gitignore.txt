@@ -1,5 +1,0 @@
-Jana's app.lnk
-Jana's app.cmd
-/driver
-/__pycache__
-tickets.db
