@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Jana's app</title>
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/static/icons/shortcut.ico" />
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">Jana's app</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    {% if session.user_id %}
+                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/changepass">Change Password</a></li>
+                    {% else %}
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>  
+        </div>
+    </div>
+
+    <div class="container body-content">
+        {% block content %}{% endblock %}
+        <hr />
+        <footer>
+            <p>&copy; {{ year }} - Jana's app. Designed and developed by Charbel Hannoun</p>
+        </footer>
+    </div>
+
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/bootstrap.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+    <script type="text/javascript">
+        async function getRequest(url = '') {
+            const response = await fetch(url, {
+                method: 'GET',
+                cache: 'no-cache'
+            })
+            return response.json()
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let url = document.location
+            let route = "/flaskwebgui-keep-server-alive"
+            let interval_request = 3 * 1000 //sec
+
+            function keep_alive_server() {
+                getRequest(url + route).then(data => console.log(data))
+            }
+
+            setInterval(keep_alive_server, interval_request)()
+        })
+    </script>
+    {% block scripts %}{% endblock %}
+    <style>
+        form {
+            margin: 8vh auto;
+        }
+
+        input {
+            margin: 0 auto;
+        }
+
+        label {
+            text-align: center;
+            width: 83%;
+        }
+
+        button {
+            margin-left: 34.5vw;
+        }
+        select{
+            margin: 0 auto;
+        }
+        .event-nav {
+            display: flex;
+            justify-content: space-evenly;
+            width: 50%;
+            margin-top: 3vh;
+            margin-left: 50vw;
+            font-size: 1.3vw;
+            list-style: none;
+        }
+        caption {
+            font-size: 4vw;
+            margin-bottom: 2vh;
+        }
+        
+    </style>
+</body>
+</html>

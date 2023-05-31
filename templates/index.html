@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="new-event">
+    <nav class="navbar">
+        <div class="navbar-collapse collapse">
+            <ul class="navbar navbar-nav event-nav">
+                <li><a href="/newevent" class="nav-item">Create New Event</a></li>
+                <li><a href="/deletevent" class="nav-item">Delete Event</a></li>
+            </ul>
+        </div>
+    </nav>  
+</div>
+<div class="events">
+    <table class="table table-striped">
+        <caption>My Events</caption>
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>
+                    <form method="post" action="/" style="margin: 0 auto;">
+                        <input type="hidden" name="event" value="{{event.event_id}}" required />
+                        <input class="btn" type="submit"value="{{event.name | capitalize}}"/>
+                    </form>
+                </td>
+                <td>{{event.date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<style>
+    input[type="submit"]{
+        background: none;
+        font-size: 1.2vw;
+        line-height: 0.4vh;
+    }
+    thead {
+        font-size: 2vw;
+    }
+
+    td {
+        font-size: 1.2vw;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+<form method="post" action="/deleteticket/{{id}}">
+    <div class="form-group">
+        <label for="ticket">Select Ticket</label>
+        <select name="number" class="form-control" required id="ticket">
+            <option selected disabled>None</option>
+            {% for ticket in tickets %}
+            <option value="{{ticket.number}}">{{ticket.number}} | {{ticket.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn">Delete Ticket</button>
+</form>
+{% endblock %}

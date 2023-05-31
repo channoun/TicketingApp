@@ -1,0 +1,56 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+<nav class="navbar">
+    <div class="navbar-collapse collapse">
+        <ul class="navbar navbar-nav event-nav">
+            <li><a href="/deleteticket/{{id}}">Delete Tickets</a></li>
+        </ul>
+    </div>
+</nav>
+<table class="table table-striped">
+    <caption>{{name | capitalize}}</caption>
+    <thead>
+        <tr>
+            <th>Ticket #</th>
+            <th>Ticket Hash</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+        <tr>
+            <td>{{ticket.number}}</td>
+            <td>{{ticket.ticket_hash}}</td>
+            <td>{{ticket.name}}</td>
+            <td>{{ticket.email}}</td>
+            <td>{{ticket.phone}}</td>
+            <td>
+                <form method="post" action="/sendticket" style="margin-top: 0;">
+                    <input type="hidden" value="{{ticket.ticket_id}}" name="id" />
+                    <button type="submit" class="btn" style="margin: 0 0;">Send Ticket</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div id="new-ticket">
+    <form method="post" action="/event/{{id}}">
+        <fieldset>
+            <legend>New Ticket</legend>
+            <div class="form-group">
+                <label for="name" style="width: 87%;">Ticketholder Name:</label>
+                <input required autocomplete="off" name="name" type="text" class="form-control" id="name" />
+            </div>
+            <div class="form-group">
+                <label for="email" style="width: 87%;">Ticketholder Email:</label>
+                <input required autocomplete="off" name="email" type="email" class="form-control" id="email" />
+            </div>
+            <button type="submit" class="btn">Confirm</button>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

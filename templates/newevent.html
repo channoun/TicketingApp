@@ -1,0 +1,39 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+<form method="post" action="/newevent" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="name">Event Name:</label>
+        <input class="form-control" required autofocus autocomplete="off" name="name" type="text" id="name"/>
+    </div>
+    <div class="form-group">
+        <label for="date">Event Date:</label>
+        <input class="form-control" required autocomplete="off" name="date" type="date" id="date"/>
+    </div>
+    <div class="form-group">
+        <label for="dropBox" style="width:96%">Will you be using a ticket design?</label>
+        <select name="design" onchange="dropBoxChange();" id="dropBox" class="form-control" required>
+            <option disabled selected>None</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </div>
+    <div class="form-group" id="file-group" style="display: none;">
+        <label for="fileBox">Upload design file</label>
+        <input class="form-control" name="design_file" type="file" id="fileBox"/>
+    </div>
+    <button type="submit" class="btn">Create Event</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    function dropBoxChange() {
+        if (document.getElementById("dropBox").value == 1) {
+            document.getElementById("file-group").style.display = "block";
+        } else {
+            document.getElementById("file-group").style.display = "none";
+        }
+    }
+</script>
+{% endblock %}

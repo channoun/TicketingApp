@@ -1,0 +1,19 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+<form method="post" action="/register">
+    <div class="form-group">
+        <label for="username">Enter Username:</label>
+        <input type="text" name="username" class="form-control" required autofocus autocomplete="off" id="username"/>
+    </div>
+    <div class="form-group">
+        <label for="password">Enter Password:</label>
+        <input type="password" name="password" class="form-control" required id="password"/>
+    </div>
+    <div class="form-group">
+        <label for="confirmation">Confirm Password:</label>
+        <input type="password" name="confirmation" class="form-control" required id="confirmation"/>
+    </div>
+    <button class="btn" type="submit">Create user</button>
+</form>
+{% endblock %}
